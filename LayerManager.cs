@@ -17,13 +17,11 @@ public class LayerManager : MonoBehavior
 
     private void Start()
     {
-        // Register listeners – each toggle drives its corresponding layer
         RegisterToggle(skeletonToggle,    skeletonRoot);
         RegisterToggle(musclesToggle,     musclesRoot);
         RegisterToggle(nervousToggle,     nervousRoot);
         RegisterToggle(circulatoryToggle, circulatoryRoot);
 
-        // Sync initial visual state with toggle defaults (all on)
         ApplyAll();
     }
 

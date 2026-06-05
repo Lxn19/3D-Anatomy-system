@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;          // requires TextMeshPro package (standard in Unity 6)
+using TMPro;          
 public class UIManager : MonoBehavior
 {
     // ---- Organ Panel ------------------------------------------------
@@ -75,16 +75,13 @@ public class UIManager : MonoBehavior
 
         if (OrganData.AnatomyDatabase.TryGetValue(query, out GameObject obj))
         {
-            // Select and highlight
             organSelector?.SelectByName(query);
 
-            // Move camera to the organ
             cameraController?.FocusOn(obj.transform.position, distance: 2f);
         }
         else
         {
             Debug.Log($"UIManager: Organ '{query}' not found.");
-            // Optionally display a "Not found" message in the panel here
         }
     }
 }

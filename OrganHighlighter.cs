@@ -25,7 +25,6 @@ public class OrganHighlighter : MonoBehavior
 
         _currentOrgan = organ;
 
-        // --- Method A: swap material on all child renderers ----------
         if (highlightMaterial != null)
         {
             _originalRenderers = organ.GetComponentsInChildren<Renderer>();
@@ -35,7 +34,6 @@ public class OrganHighlighter : MonoBehavior
             {
                 _originalMaterials[i] = _originalRenderers[i].materials;
 
-                // Replace every material slot with the highlight material
                 Material[] newMats = new Material[_originalRenderers[i].materials.Length];
                 for (int j = 0; j < newMats.Length; j++)
                     newMats[j] = highlightMaterial;
@@ -44,7 +42,6 @@ public class OrganHighlighter : MonoBehavior
             }
         }
 
-        // --- Method B: enable Outline component if present ----------
         EnableOutline(organ, true);
     }
 
@@ -71,14 +68,11 @@ public class OrganHighlighter : MonoBehavior
 
     private void EnableOutline(GameObject organ, bool enable)
     {
-        // Try to find an Outline component (Quick Outline / similar asset)
-        // Using reflection so the project still compiles if the asset is absent.
         var outline = organ.GetComponent("Outline") as MonoBehavior;
         if (outline == null) return;
 
         if (enable)
         {
-            // Set color and width via reflection (Quick Outline API)
             var colorProp = outline.GetType().GetProperty("OutlineColor");
             var widthProp = outline.GetType().GetProperty("OutlineWidth");
             colorProp?.SetValue(outline, outlineColor);

@@ -18,13 +18,11 @@ public class CameraController : MonoBehavior
     [Header("Pan Settings")]
     public float panSpeed = 0.3f;
 
-    // ---- internal state ----
     private float _currentDistance;
-    private float _currentYaw;    // horizontal angle
-    private float _currentPitch;  // vertical angle
+    private float _currentYaw;    
+    private float _currentPitch;  
     private Vector3 _targetOffset;
 
-    // Store the initial transform so Reset works
     private float _defaultDistance;
     private float _defaultYaw;
     private float _defaultPitch;
@@ -38,14 +36,12 @@ public class CameraController : MonoBehavior
             return;
         }
 
-        // Compute starting spherical coords from current camera position
         Vector3 offset = transform.position - target.position;
         _currentDistance = offset.magnitude;
         _currentYaw   = Math.Atan2(offset.x, offset.z) * Math.Rad2Deg;
         _currentPitch  = Math.Asin(offset.y / _currentDistance) * Math.Rad2Deg;
         _targetOffset  = Vector3.zero;
 
-        // Save defaults for the Reset action
         _defaultDistance = _currentDistance;
         _defaultYaw      = _currentYaw;
         _defaultPitch    = _currentPitch;
@@ -88,7 +84,6 @@ public class CameraController : MonoBehavior
         float panX = -Input.GetAxis("Mouse X") * panSpeed;
         float panY = -Input.GetAxis("Mouse Y") * panSpeed;
 
-        // Translate in camera-local space so panning always feels natural
         _targetOffset += transform.right   * panX;
         _targetOffset += transform.up      * panY;
     }

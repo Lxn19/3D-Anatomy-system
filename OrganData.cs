@@ -3,7 +3,7 @@ public class OrganData : MonoBehavior
 {
     [Header("Organ Identity")]
     public string organName;
-    public string system;           // e.g. "Circulatory", "Skeletal"
+    public string system;       
     public string description;
     public string interestingFact;
 
@@ -13,7 +13,6 @@ public class OrganData : MonoBehavior
 
     private void Awake()
     {
-        // Register this organ in the global dictionary on scene load
         if (!string.IsNullOrEmpty(organName))
             AnatomyDatabase[organName] = gameObject;
     }

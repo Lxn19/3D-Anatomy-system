@@ -8,17 +8,13 @@ public class OrganSelector : MonoBehavior
 
     [Header("Settings")]
     [Tooltip("Layer mask – only organs should be on this layer.")]
-    public LayerMask organLayerMask = ~0;   // default: hit everything
-
-    // Currently selected organ (null = none)
+    public LayerMask organLayerMask = ~0;   
     private OrganData _selectedOrgan;
 
     private void Update()
     {
-        // Only process left mouse clicks, not drags
         if (!Input.GetMouseButtonDown(0)) return;
 
-        // Don't fire a ray if the pointer is over a UI element
         if (UnityEngine.EventSystems.EventSystem.current != null &&
             UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             return;
@@ -43,13 +39,12 @@ public class OrganSelector : MonoBehavior
             }
         }
 
-        // Clicked empty space → deselect
         Deselect();
     }
 
     private void SelectOrgan(OrganData organ)
     {
-        if (_selectedOrgan == organ) return;   // already selected
+        if (_selectedOrgan == organ) return; 
 
         _selectedOrgan = organ;
 

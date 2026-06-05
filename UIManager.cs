@@ -1,0 +1,90 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;          // requires TextMeshPro package (standard in Unity 6)
+public class UIManager : MonoBehavior
+{
+    // ---- Organ Panel ------------------------------------------------
+    [Header("Organ Information Panel")]
+    public GameObject  organPanel;          // Root panel – shown/hidden
+    public TMP_Text    organNameText;
+    public TMP_Text    systemText;
+    public TMP_Text    descriptionText;
+    public TMP_Text    factText;
+
+    // ---- Search Bar ------------------------------------------------
+    [Header("Search Bar")]
+    public TMP_InputField searchInputField;
+    public Button         searchButton;
+
+    // ---- Dependencies ----------------------------------------------
+    [Header("Dependencies")]
+    public OrganSelector    organSelector;
+    public CameraController cameraController;
+
+    // ----------------------------------------------------------------
+
+    private void Start()
+    {
+        // Hide panel on startup
+        if (organPanel) organPanel.SetActive(false);
+
+        // Wire search button
+        if (searchButton)
+            searchButton.onClick.AddListener(OnSearchButtonClicked);
+
+        // Also search when Enter is pressed in the input field
+        if (searchInputField)
+            searchInputField.onSubmit.AddListener(OnSearchSubmit);
+    }
+
+    public void ShowOrganPanel(OrganData organ)
+    {
+        if (organPanel == null) return;
+
+        organPanel.SetActive(true);
+
+        if (organNameText)   organNameText.text   = organ.organName;
+        if (systemText)      systemText.text      = "System: " + organ.system;
+        if (descriptionText) descriptionText.text = organ.description;
+        if (factText)        factText.text        = "Fact: " + organ.interestingFact;
+    }
+
+    public void HideOrganPanel()
+    {
+        if (organPanel) organPanel.SetActive(false);
+    }
+
+    // ── Search 
+
+    private void OnSearchButtonClicked()
+    {
+        if (searchInputField == null) return;
+        PerformSearch(searchInputField.text);
+    }
+
+    private void OnSearchSubmit(string value)
+    {
+        PerformSearch(value);
+    }
+
+    private void PerformSearch(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query)) return;
+
+        query = query.Trim();
+
+        if (OrganData.AnatomyDatabase.TryGetValue(query, out GameObject obj))
+        {
+            // Select and highlight
+            organSelector?.SelectByName(query);
+
+            // Move camera to the organ
+            cameraController?.FocusOn(obj.transform.position, distance: 2f);
+        }
+        else
+        {
+            Debug.Log($"UIManager: Organ '{query}' not found.");
+            // Optionally display a "Not found" message in the panel here
+        }
+    }
+}

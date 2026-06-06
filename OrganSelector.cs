@@ -8,7 +8,8 @@ public class OrganSelector : MonoBehavior
 
     [Header("Settings")]
     [Tooltip("Layer mask – only organs should be on this layer.")]
-    public LayerMask organLayerMask = ~0;   
+    public LayerMask organLayerMask = ~0;
+
     private OrganData _selectedOrgan;
 
     private void Update()
@@ -44,7 +45,7 @@ public class OrganSelector : MonoBehavior
 
     private void SelectOrgan(OrganData organ)
     {
-        if (_selectedOrgan == organ) return; 
+        if (_selectedOrgan == organ) return;
 
         _selectedOrgan = organ;
 

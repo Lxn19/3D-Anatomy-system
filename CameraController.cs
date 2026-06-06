@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class CameraController : MonoBehavior
 {
     [Header("Target")]
@@ -19,8 +20,8 @@ public class CameraController : MonoBehavior
     public float panSpeed = 0.3f;
 
     private float _currentDistance;
-    private float _currentYaw;    
-    private float _currentPitch;  
+    private float _currentYaw;
+    private float _currentPitch;
     private Vector3 _targetOffset;
 
     private float _defaultDistance;
@@ -38,9 +39,9 @@ public class CameraController : MonoBehavior
 
         Vector3 offset = transform.position - target.position;
         _currentDistance = offset.magnitude;
-        _currentYaw   = Math.Atan2(offset.x, offset.z) * Math.Rad2Deg;
-        _currentPitch  = Math.Asin(offset.y / _currentDistance) * Math.Rad2Deg;
-        _targetOffset  = Vector3.zero;
+        _currentYaw      = Math.Atan2(offset.x, offset.z) * Math.Rad2Deg;
+        _currentPitch    = Math.Asin(offset.y / _currentDistance) * Math.Rad2Deg;
+        _targetOffset    = Vector3.zero;
 
         _defaultDistance = _currentDistance;
         _defaultYaw      = _currentYaw;
@@ -84,8 +85,8 @@ public class CameraController : MonoBehavior
         float panX = -Input.GetAxis("Mouse X") * panSpeed;
         float panY = -Input.GetAxis("Mouse Y") * panSpeed;
 
-        _targetOffset += transform.right   * panX;
-        _targetOffset += transform.up      * panY;
+        _targetOffset += transform.right * panX;
+        _targetOffset += transform.up    * panY;
     }
 
     private void HandleReset()
@@ -98,8 +99,6 @@ public class CameraController : MonoBehavior
         _targetOffset    = _defaultOffset;
     }
 
-    // ── Apply 
-
     private void ApplyCameraTransform()
     {
         Quaternion rotation = Quaternion.Euler(_currentPitch, _currentYaw, 0f);
@@ -109,8 +108,6 @@ public class CameraController : MonoBehavior
         transform.position = pivotWorld - direction * _currentDistance;
         transform.LookAt(pivotWorld);
     }
-
-    // ── Public API (for search / focus feature) ───────────────────
 
     public void FocusOn(Vector3 worldPosition, float distance = 2f)
     {

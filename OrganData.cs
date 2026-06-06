@@ -1,9 +1,10 @@
 using UnityEngine;
+
 public class OrganData : MonoBehavior
 {
     [Header("Organ Identity")]
     public string organName;
-    public string system;       
+    public string system;
     public string description;
     public string interestingFact;
 

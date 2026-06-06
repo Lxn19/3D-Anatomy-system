@@ -1,38 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;          
+using TMPro;
+
 public class UIManager : MonoBehavior
 {
-    // ---- Organ Panel ------------------------------------------------
     [Header("Organ Information Panel")]
-    public GameObject  organPanel;          // Root panel – shown/hidden
-    public TMP_Text    organNameText;
-    public TMP_Text    systemText;
-    public TMP_Text    descriptionText;
-    public TMP_Text    factText;
+    public GameObject     organPanel;
+    public TMP_Text       organNameText;
+    public TMP_Text       systemText;
+    public TMP_Text       descriptionText;
+    public TMP_Text       factText;
 
-    // ---- Search Bar ------------------------------------------------
     [Header("Search Bar")]
     public TMP_InputField searchInputField;
     public Button         searchButton;
 
-    // ---- Dependencies ----------------------------------------------
     [Header("Dependencies")]
     public OrganSelector    organSelector;
     public CameraController cameraController;
 
-    // ----------------------------------------------------------------
-
     private void Start()
     {
-        // Hide panel on startup
         if (organPanel) organPanel.SetActive(false);
 
-        // Wire search button
         if (searchButton)
             searchButton.onClick.AddListener(OnSearchButtonClicked);
 
-        // Also search when Enter is pressed in the input field
         if (searchInputField)
             searchInputField.onSubmit.AddListener(OnSearchSubmit);
     }
@@ -54,8 +47,6 @@ public class UIManager : MonoBehavior
         if (organPanel) organPanel.SetActive(false);
     }
 
-    // ── Search 
-
     private void OnSearchButtonClicked()
     {
         if (searchInputField == null) return;
@@ -76,7 +67,6 @@ public class UIManager : MonoBehavior
         if (OrganData.AnatomyDatabase.TryGetValue(query, out GameObject obj))
         {
             organSelector?.SelectByName(query);
-
             cameraController?.FocusOn(obj.transform.position, distance: 2f);
         }
         else

@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class OrganData : MonoBehavior
+
 {
     [Header("Organ Identity")]
     public string organName;

@@ -50,30 +50,28 @@ public class LayerManager : MonoBehavior
         root.SetActive(isOn);
     }
 
-    // ── Public API (called from code if needed) ───────────────────
-
     public void ShowSkeleton(bool show)
     {
-        if (skeletonRoot) skeletonRoot.SetActive(show);
-        if (skeletonToggle) skeletonToggle.SetIsOnWithoutNotify(show);
+        if (skeletonRoot)    skeletonRoot.SetActive(show);
+        if (skeletonToggle)  skeletonToggle.SetIsOnWithoutNotify(show);
     }
 
     public void ShowMuscles(bool show)
     {
-        if (musclesRoot) musclesRoot.SetActive(show);
-        if (musclesToggle) musclesToggle.SetIsOnWithoutNotify(show);
+        if (musclesRoot)    musclesRoot.SetActive(show);
+        if (musclesToggle)  musclesToggle.SetIsOnWithoutNotify(show);
     }
 
     public void ShowNervous(bool show)
     {
-        if (nervousRoot) nervousRoot.SetActive(show);
-        if (nervousToggle) nervousToggle.SetIsOnWithoutNotify(show);
+        if (nervousRoot)    nervousRoot.SetActive(show);
+        if (nervousToggle)  nervousToggle.SetIsOnWithoutNotify(show);
     }
 
     public void ShowCirculatory(bool show)
     {
-        if (circulatoryRoot) circulatoryRoot.SetActive(show);
-        if (circulatoryToggle) circulatoryToggle.SetIsOnWithoutNotify(show);
+        if (circulatoryRoot)    circulatoryRoot.SetActive(show);
+        if (circulatoryToggle)  circulatoryToggle.SetIsOnWithoutNotify(show);
     }
 
     public void ShowAll()

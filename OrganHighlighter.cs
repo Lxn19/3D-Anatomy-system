@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class OrganHighlighter : MonoBehavior
 {
     [Header("Simple Highlight")]
@@ -10,12 +11,9 @@ public class OrganHighlighter : MonoBehavior
     public Color outlineColor = new Color(0f, 0.9f, 1f, 1f);
     public float outlineWidth = 5f;
 
-    // Internal state
-    private GameObject      _currentOrgan;
-    private Renderer[]      _originalRenderers;
-    private Material[][]    _originalMaterials;
-
-    // ── Public API 
+    private GameObject   _currentOrgan;
+    private Renderer[]   _originalRenderers;
+    private Material[][] _originalMaterials;
 
     public void Highlight(GameObject organ)
     {
@@ -49,7 +47,6 @@ public class OrganHighlighter : MonoBehavior
     {
         if (_currentOrgan == null) return;
 
-        // Restore original materials
         if (_originalRenderers != null)
         {
             for (int i = 0; i < _originalRenderers.Length; i++)
@@ -61,7 +58,7 @@ public class OrganHighlighter : MonoBehavior
 
         EnableOutline(_currentOrgan, false);
 
-        _currentOrgan     = null;
+        _currentOrgan      = null;
         _originalRenderers = null;
         _originalMaterials = null;
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OrganData : MonoBehaviour
+public class OrganData : MonoBehavior
 
 {
     [Header("Organ Identity")]

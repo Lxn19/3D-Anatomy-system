@@ -1,0 +1,26 @@
+{
+  "name": "anatomy-backend",
+  "version": "1.0.0",
+  "description": "3D Anatomy Learning System — Express API (All Members)",
+  "main": "app.js",
+  "scripts": {
+    "start":   "node app.js",
+    "dev":     "nodemon app.js",
+    "test":    "node integrationTest.js",
+    "db:init": "psql $DATABASE_URL -f schema.sql"
+  },
+  "dependencies": {
+    "bcryptjs":           "^2.4.3",
+    "cors":               "^2.8.5",
+    "dotenv":             "^16.0.3",
+    "express":            "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "jsonwebtoken":       "^9.0.2",
+    "openai":             "^4.28.0",
+    "pg":                 "^8.11.3",
+    "zustand":            "^4.4.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
